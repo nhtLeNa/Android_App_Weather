@@ -1,6 +1,6 @@
 package com.example.myweather.Model;
 
-class Sys {
+public class Sys {
     private int type;
     private int id ;
     private double message;
