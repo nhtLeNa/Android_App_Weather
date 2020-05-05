@@ -37,11 +37,11 @@
         android:textColor="#000"
         android:text="HCMUS-FIT GROUP 06 \u00AE"/>
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:theme="@style/AppTheme.Button"
-        android:text="Great"
+        android:text="Let's use it"
         android:textSize="14sp"
         android:paddingRight="20dp"
         android:visibility="visible"

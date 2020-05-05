@@ -47,40 +47,40 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.about_layout);
 
-        coordinatorLayout = findViewById(R.id.root_view);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        System.out.println("zo");
-
-        //Request permission
-        Dexter.withContext(MainActivity.this)
-                .withPermissions(Manifest.permission.ACCESS_COARSE_LOCATION,
-                                Manifest.permission.ACCESS_FINE_LOCATION)
-                .withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
-                            buildLocationRequest();
-                            buildLocationCallBack();
-
-                            if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                            ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                                return;
-                            }
-                            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
-                            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                        Snackbar.make(coordinatorLayout, "Permission Denied", Snackbar.LENGTH_LONG);
-                    }
-                }).check();
+//        coordinatorLayout = findViewById(R.id.root_view);
+//        toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        System.out.println("zo");
+//
+//        //Request permission
+//        Dexter.withContext(MainActivity.this)
+//                .withPermissions(Manifest.permission.ACCESS_COARSE_LOCATION,
+//                                Manifest.permission.ACCESS_FINE_LOCATION)
+//                .withListener(new MultiplePermissionsListener() {
+//                    @Override
+//                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+//                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
+//                            buildLocationRequest();
+//                            buildLocationCallBack();
+//
+//                            if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+//                            ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                                return;
+//                            }
+//                            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
+//                            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+//                        Snackbar.make(coordinatorLayout, "Permission Denied", Snackbar.LENGTH_LONG);
+//                    }
+//                }).check();
     }
 
     private void buildLocationCallBack() {
