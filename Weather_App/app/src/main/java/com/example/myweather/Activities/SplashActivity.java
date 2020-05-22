@@ -1,6 +1,7 @@
 package com.example.myweather.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -9,20 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myweather.R;
 
-public class LoadingActivity extends AppCompatActivity {
+
+public class SplashActivity extends AppCompatActivity {
+
+    SharedPreferences prefs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loading);
-
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }, 5000);
+        setContentView(R.layout.activity_splash);
+        prefs = getSharedPreferences("minhduc", MODE_PRIVATE);
     }
-
     @Override
     protected void onResume() {
         View decorView = getWindow().getDecorView();
@@ -32,7 +30,21 @@ public class LoadingActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
         super.onResume();
+
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            if (prefs.getBoolean("FirstRun", true)) {
+
+                prefs.edit().putBoolean("FirstRun", false).commit();
+                startActivity(new Intent(this , first_activity.class));
+                finish();
+            }
+            else {
+                startActivity(new Intent(this , MainActivity.class));
+                finish();
+            }
+        }, 600);
     }
 }
+
