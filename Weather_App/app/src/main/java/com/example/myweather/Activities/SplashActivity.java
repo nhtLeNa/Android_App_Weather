@@ -33,6 +33,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onResume();
 
         final Handler handler = new Handler();
+        // Chạy lần đầu xong tắt xài cái này
         handler.postDelayed(() -> {
             if (prefs.getBoolean("FirstRun", true)) {
 
@@ -44,7 +45,13 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(this , MainActivity.class));
                 finish();
             }
-        }, 600);
+        }, 900);
+
+        // Không cần chạy lần đầu là tắt thì xài cái này
+        handler.postDelayed(() -> {
+                startActivity(new Intent(this , first_activity.class));
+                finish();
+        }, 900);
     }
 }
 
