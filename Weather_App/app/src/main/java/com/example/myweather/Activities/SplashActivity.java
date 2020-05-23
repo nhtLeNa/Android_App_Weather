@@ -34,18 +34,18 @@ public class SplashActivity extends AppCompatActivity {
 
         final Handler handler = new Handler();
         // Chạy lần đầu xong tắt xài cái này
-        handler.postDelayed(() -> {
-            if (prefs.getBoolean("FirstRun", true)) {
-
-                prefs.edit().putBoolean("FirstRun", false).commit();
-                startActivity(new Intent(this , first_activity.class));
-                finish();
-            }
-            else {
-                startActivity(new Intent(this , MainActivity.class));
-                finish();
-            }
-        }, 900);
+//        handler.postDelayed(() -> {
+//            if (prefs.getBoolean("FirstRun", true)) {
+//
+//                prefs.edit().putBoolean("FirstRun", false).commit();
+//                startActivity(new Intent(this , first_activity.class));
+//                finish();
+//            }
+//            else {
+//                startActivity(new Intent(this , MainActivity.class));
+//                finish();
+//            }
+//        }, 900);
 
         // Không cần chạy lần đầu là tắt thì xài cái này
         handler.postDelayed(() -> {
