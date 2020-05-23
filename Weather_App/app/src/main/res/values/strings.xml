@@ -1,4 +1,5 @@
 <resources>
+<<<<<<< Updated upstream
     <string name="app_name">Ahihiforecast</string>
 
     <string name="action_search">Search</string>
@@ -149,4 +150,10 @@
     <string name="button_sure_default">Done</string>
     <string name="button_sure">Exit</string>
     <string name="button_preview">Pin</string>
+=======
+    <string name="app_name">My Weather</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+>>>>>>> Stashed changes
 </resources>
