@@ -1,5 +1,6 @@
 package com.example.myweather.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -16,7 +17,9 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
 
         new Handler().postDelayed(() -> {
-            System.out.println("Hello");
+            Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }, 5000);
     }
 
