@@ -36,17 +36,17 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
                 false);
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//
-//        mCheckGraphListener = (CheckRefreshClickListener) context;
-//        mCheckSettingsListener = (CheckRefreshClickListener) context;
-//        mCheckAboutListener = (CheckRefreshClickListener) context;
-//        mCheckShareListener = (CheckRefreshClickListener) context;
-//        mCheckAutoDetectListener = (CheckRefreshClickListener) context;
-//        mCheckRefresh = (CheckRefreshClickListener) context;
-//    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mCheckGraphListener = (CheckRefreshClickListener) context;
+        mCheckSettingsListener = (CheckRefreshClickListener) context;
+        mCheckAboutListener = (CheckRefreshClickListener) context;
+        mCheckShareListener = (CheckRefreshClickListener) context;
+        mCheckAutoDetectListener = (CheckRefreshClickListener) context;
+        mCheckRefresh = (CheckRefreshClickListener) context;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -66,11 +66,3 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
     }
 }
 
-interface CheckRefreshClickListener {
-    void onGraphClick();
-    void onUpdateClick();
-    void onShareClick();
-    void onSettingsClick();
-    void onAboutClick();
-    void onRefresh();
-}
