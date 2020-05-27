@@ -6,8 +6,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuItemImpl;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.myweather.Fragment.ShowRoundDialogFragment;
 import com.example.myweather.R;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -43,6 +45,16 @@ public class MainActivity extends AppCompatActivity {
         searchView.setMenuItem(item);
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.bottommenu) {
+            ShowRoundDialogFragment showRoundDialogFragment = ShowRoundDialogFragment.newInstance();
+            showRoundDialogFragment.show(getSupportFragmentManager(), "add_menu_fragment");
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public static long saveLastUpdateTime(SharedPreferences defaultSharedPreferences) {
