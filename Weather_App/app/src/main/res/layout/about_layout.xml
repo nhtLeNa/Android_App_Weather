@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:theme="@style/AppTheme.Button"
-        android:text="Let's use it"
+        android:text="Got it!"
         android:textSize="14sp"
         android:paddingRight="20dp"
         android:visibility="visible"

@@ -74,7 +74,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @Override
     public void onShareClick() {
-
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "\n\n For more weather updates, check this cool Weather app at: https://github.com/nhtien2010/Android_App_Weather");
+        sendIntent.setType("text/plain");
+        this.startActivity(sendIntent);
     }
 
     @Override
