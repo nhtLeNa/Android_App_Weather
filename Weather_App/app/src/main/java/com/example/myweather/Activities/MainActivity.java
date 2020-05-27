@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @Override
     public void onShareClick() {
-        final String appPackageName = getApplicationContext().getPackageName();
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
