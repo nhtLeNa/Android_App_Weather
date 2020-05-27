@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // Set SearchView
+        searchView = findViewById(R.id.search_view);
     }
 
     @Override
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         MenuItem item = menu.findItem(R.id.action_search);
-//        searchView.setMenuItem(item);
+        searchView.setMenuItem(item);
 
         return true;
     }
