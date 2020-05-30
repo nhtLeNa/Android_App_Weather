@@ -1,5 +1,0 @@
-package com.example.myweather.Task;
-
-public enum  TaskResult {
-    SUCCESS, BAD_RESPONSE, IO_EXCEPTION, TOO_MANY_REQUESTS;
-}

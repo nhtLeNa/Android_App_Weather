@@ -15,6 +15,7 @@ import com.example.myweather.Fragment.AboutDialogFragment;
 import com.example.myweather.Fragment.CheckRefreshClickListener;
 import com.example.myweather.Fragment.ShowRoundDialogFragment;
 import com.example.myweather.R;
+import com.example.myweather.Task.GetWeatherTask;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.Calendar;
@@ -39,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
         // Set SearchView
         searchView = findViewById(R.id.search_view);
+
+        //Test task
+        System.out.println("Hello");
+        new GetWeatherTask().execute();
+
     }
 
     @Override
