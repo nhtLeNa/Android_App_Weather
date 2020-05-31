@@ -10,12 +10,13 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.myweather.Fragment.AboutDialogFragment;
 import com.example.myweather.Fragment.CheckRefreshClickListener;
 import com.example.myweather.Fragment.ShowRoundDialogFragment;
 import com.example.myweather.R;
-import com.example.myweather.Task.GetWeatherTask;
+import com.google.android.material.tabs.TabLayout;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.Calendar;
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     public String recentCityId = "";
     private androidx.appcompat.widget.Toolbar toolbar;
+
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
 
     @Override
@@ -41,9 +45,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         // Set SearchView
         searchView = findViewById(R.id.search_view);
 
-        //Test task
-        System.out.println("Hello");
-        new GetWeatherTask().execute();
+
+        // Set up viewpager and tab
+        viewPager = findViewById(R.id.view_pager);
+        tabLayout = findViewById(R.id.tabs);
 
     }
 
