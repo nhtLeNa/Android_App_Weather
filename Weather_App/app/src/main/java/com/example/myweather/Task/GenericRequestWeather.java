@@ -68,6 +68,8 @@ public abstract class GenericRequestWeather extends AsyncTask<String, String, Ta
                 reqParams = new String[]{"coords", lat, lon};
             } else if ("city".equals(zeroParam)) {
                 reqParams = new String[]{"city", params[1]};
+            } else if ("cc".equals(zeroParam)) {
+                reqParams = new String[]{"cc", params[1]};
             }
         }
 
@@ -174,9 +176,11 @@ public abstract class GenericRequestWeather extends AsyncTask<String, String, Ta
                 urlBuilder.append("lat=").append(reqParams[1]).append("&lon=").append(reqParams[2]);
             } else if ("city".equals(zeroParam)) {
                 urlBuilder.append("q=").append(reqParams[1]);
+            } else if ("cc".equals(zeroParam)) {
+                urlBuilder.append("id=").append(URLEncoder.encode(reqParams[1], "UTF-8"));
             }
         } else {
-            final String cityId = "2643743";
+            final String cityId = "1580240";
                     //sp.getString("cityId", Common.DEFAULT_CITY_ID);
             urlBuilder.append("id=").append(URLEncoder.encode(cityId, "UTF-8"));
         }
