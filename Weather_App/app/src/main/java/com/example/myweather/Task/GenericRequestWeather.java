@@ -1,11 +1,11 @@
 package com.example.myweather.Task;
 
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.provider.SyncStateContract;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -25,20 +25,23 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Locale;
 
-public abstract class GetWeatherTask extends AsyncTask<String, String, TaskOutput> {
 
+// Lay ket qua du bao ca toa do lan thanh pho
+public abstract class GenericRequestWeather extends AsyncTask<String, String, TaskOutput> {
     ProgressDialog progressDialog;
     Context context;
-    MainActivity mainActivity;
+    MainActivity activity;
+    public int loading = 0;
 
-    public GetWeatherTask(ProgressDialog progressDialog, Context context, MainActivity mainActivity) {
+    public GenericRequestWeather(Context context, MainActivity activity, ProgressDialog progressDialog) {
         this.context = context;
+        this.activity = activity;
         this.progressDialog = progressDialog;
-        this.mainActivity = mainActivity;
     }
 
     @Override
     protected void onPreExecute() {
+        incLoadingCounter();
         if (!progressDialog.isShowing()) {
             progressDialog.setMessage(context.getString(R.string.downloading_data));
             progressDialog.setCanceledOnTouchOutside(false);
@@ -46,25 +49,25 @@ public abstract class GetWeatherTask extends AsyncTask<String, String, TaskOutpu
         }
     }
 
-
     @Override
-    protected TaskOutput doInBackground(String... strings) {
+    protected TaskOutput doInBackground(String... params) {
         TaskOutput output = new TaskOutput();
 
         String response = "";
         String[] reqParams = new String[]{};
 
-        if (reqParams != null && reqParams.length > 0) {
-            final String zeroParam = reqParams[0];
+        if (params != null && params.length > 0) {
+            final String zeroParam = params[0];
             if ("cachedResponse".equals(zeroParam)) {
-                response = reqParams[1];
+                response = params[1];
+                // Actually we did nothing in this case :)
                 output.taskResult = TaskResult.SUCCESS;
             } else if ("coords".equals(zeroParam)) {
-                String lat = reqParams[1];
-                String lon = reqParams[2];
+                String lat = params[1];
+                String lon = params[2];
                 reqParams = new String[]{"coords", lat, lon};
             } else if ("city".equals(zeroParam)) {
-                reqParams = new String[]{"city", reqParams[1]};
+                reqParams = new String[]{"city", params[1]};
             }
         }
 
@@ -86,30 +89,33 @@ public abstract class GetWeatherTask extends AsyncTask<String, String, TaskOutpu
                     response += stringBuilder.toString();
                     close(r);
                     urlConnection.disconnect();
-                    // Ngang day la xong lay du lieu
+                    // Background work finished successfully
                     Log.i("Task", "done successfully");
                     output.taskResult = TaskResult.SUCCESS;
-                    // Luu lai thoi gian
-                    mainActivity.saveLastUpdateTime(PreferenceManager.getDefaultSharedPreferences(context));
+                    // Save date/time for latest successful result
+                    activity.saveLastUpdateTime(PreferenceManager.getDefaultSharedPreferences(context));
                 } else if (urlConnection.getResponseCode() == 429) {
-                    // 429: loi too many rq
+                    // Too many requests
                     Log.i("Task", "too many requests");
                     output.taskResult = TaskResult.TOO_MANY_REQUESTS;
                 } else {
-                    // loi bad response
+                    // Bad response from server
                     Log.i("Task", "bad response " + urlConnection.getResponseCode());
                     output.taskResult = TaskResult.BAD_RESPONSE;
                 }
             } catch (IOException e) {
                 Log.e("IOException Data", response);
                 e.printStackTrace();
+                // Exception while reading data from url connection
                 output.taskResult = TaskResult.IO_EXCEPTION;
             }
         }
 
         if (TaskResult.SUCCESS.equals(output.taskResult)) {
+            // Parse JSON data
             ParseResult parseResult = parseResponse(response);
             if (ParseResult.CITY_NOT_FOUND.equals(parseResult)) {
+                // Retain previously specified city if current one was not recognized
                 restorePreviousCity();
             }
             output.parseResult = parseResult;
@@ -119,10 +125,15 @@ public abstract class GetWeatherTask extends AsyncTask<String, String, TaskOutpu
     }
 
     @Override
-    protected void onPostExecute(TaskOutput taskOutput) {
-        progressDialog.dismiss();
+    protected void onPostExecute(TaskOutput output) {
+        if (loading == 1) {
+            progressDialog.dismiss();
+        }
+        decLoadingCounter();
+
         updateMainUI();
-        handleTaskOutput(taskOutput);
+
+        handleTaskOutput(output);
     }
 
     protected final void handleTaskOutput(TaskOutput output) {
@@ -130,29 +141,30 @@ public abstract class GetWeatherTask extends AsyncTask<String, String, TaskOutpu
             case SUCCESS: {
                 ParseResult parseResult = output.parseResult;
                 if (ParseResult.CITY_NOT_FOUND.equals(parseResult)) {
-                    Snackbar.make(mainActivity.findViewById(android.R.id.content), context.getString(R.string.msg_city_not_found), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(activity.findViewById(android.R.id.content), context.getString(R.string.msg_city_not_found), Snackbar.LENGTH_LONG).show();
                 } else if (ParseResult.JSON_EXCEPTION.equals(parseResult)) {
-                    Snackbar.make(mainActivity.findViewById(android.R.id.content), context.getString(R.string.msg_err_parsing_json), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(activity.findViewById(android.R.id.content), context.getString(R.string.msg_err_parsing_json), Snackbar.LENGTH_LONG).show();
                 }
                 break;
             }
             case TOO_MANY_REQUESTS: {
-                Snackbar.make(mainActivity.findViewById(android.R.id.content), context.getString(R.string.msg_too_many_requests), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(activity.findViewById(android.R.id.content), context.getString(R.string.msg_too_many_requests), Snackbar.LENGTH_LONG).show();
                 break;
             }
             case BAD_RESPONSE: {
                 break;
             }
             case IO_EXCEPTION: {
-                Snackbar.make(mainActivity.findViewById(android.R.id.content), context.getString(R.string.msg_connection_not_available), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(activity.findViewById(android.R.id.content), context.getString(R.string.msg_connection_not_available), Snackbar.LENGTH_LONG).show();
                 break;
             }
         }
     }
 
+
     private URL provideURL(String[] reqParams) throws UnsupportedEncodingException, MalformedURLException {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        String apiKey = sp.getString("apiKey", mainActivity.getResources().getString(R.string.apiKey));
+        String apiKey = sp.getString("apiKey", activity.getResources().getString(R.string.apiKey));
 
         StringBuilder urlBuilder = new StringBuilder("https://api.openweathermap.org/data/2.5/");
         urlBuilder.append(getAPIName()).append("?");
@@ -167,7 +179,7 @@ public abstract class GetWeatherTask extends AsyncTask<String, String, TaskOutpu
             final String cityId = sp.getString("cityId", Common.DEFAULT_CITY_ID);
             urlBuilder.append("id=").append(URLEncoder.encode(cityId, "UTF-8"));
         }
-        urlBuilder.append("&lang=en");
+        urlBuilder.append("&lang=").append("en");
         urlBuilder.append("&mode=json");
         urlBuilder.append("&appid=").append(apiKey);
 
@@ -175,11 +187,11 @@ public abstract class GetWeatherTask extends AsyncTask<String, String, TaskOutpu
     }
 
     private void restorePreviousCity() {
-        if (!TextUtils.isEmpty(mainActivity.recentCityId)) {
+        if (!TextUtils.isEmpty(activity.recentCityId)) {
             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-            editor.putString("cityId", mainActivity.recentCityId);
+            editor.putString("cityId", activity.recentCityId);
             editor.commit();
-            mainActivity.recentCityId = "";
+            activity.recentCityId = "";
         }
     }
 
@@ -193,8 +205,15 @@ public abstract class GetWeatherTask extends AsyncTask<String, String, TaskOutpu
         }
     }
 
-    protected void updateMainUI() {
+    private void incLoadingCounter() {
+        loading++;
+    }
 
+    private void decLoadingCounter() {
+        loading--;
+    }
+
+    protected void updateMainUI() {
     }
 
     protected abstract ParseResult parseResponse(String response);

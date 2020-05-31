@@ -332,6 +332,7 @@
         android:layout_height="match_parent"
         app:elevation="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:targetApi="lollipop" />
+        tools:targetApi="lollipop"
+        android:nestedScrollingEnabled="true"/>
 
 </LinearLayout>
