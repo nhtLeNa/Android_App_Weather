@@ -9,6 +9,8 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationListener;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -24,11 +26,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.myweather.Adapter.ViewPagerAdapter;
 import com.example.myweather.Adapter.WeatherRecyclerAdapter;
 import com.example.myweather.Fragment.AboutDialogFragment;
+import com.example.myweather.Fragment.AmbiguousLocationDialogFragment;
 import com.example.myweather.Fragment.CheckRefreshClickListener;
 import com.example.myweather.Fragment.RecyclerViewFragment;
 import com.example.myweather.Fragment.ShowRoundDialogFragment;
@@ -46,6 +50,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -156,16 +161,59 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
         progressDialog = new ProgressDialog(MainActivity.this);
 
+        //bundle
+        //Bundle
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null && bundle.getBoolean("shouldRefresh")) {
+            refreshWeather();
+        }
+
         //format
         formatIcon = new FormatIcon(this);
+
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                new FindCityByNameTask(getApplicationContext(),
+                        MainActivity.this, progressDialog).execute("city", query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (shouldUpdate() && isNetworkAvailable()) {
+            getTodayWeather();
+            getLongTermWeather();
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        updateTodayWeatherUI();
-       // updateLongTermWeatherUI();
+ //       new TodayWeatherTask(this, this, progressDialog).execute();
+//        updateLongTermWeatherUI();
+        new LongTermWeatherTask(this, this, progressDialog).execute();
         //updateUVIndexUI();
+        updateTodayWeatherUI();
+//        updateLongTermWeatherUI();
     }
 
     @Override
@@ -573,9 +621,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @SuppressLint("ClickableViewAccessibility")
     private void updateLongTermWeatherUI() {
-//        if (destroyed) {
-//            return;
-//        }
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         Bundle bundleToday = new Bundle();
@@ -805,6 +850,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
         @Override
         protected ParseResult parseResponse(String response) {
+            System.out.println(response);
             return parseTodayJson(response);
         }
 
@@ -816,8 +862,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         @Override
         protected void updateMainUI() {
             updateTodayWeatherUI();
-//            updateLastUpdateTime();
-//            updateUVIndexUI();
         }
     }
 
@@ -839,6 +883,114 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         @Override
         protected void updateMainUI() {
             updateLongTermWeatherUI();
+        }
+    }
+
+    private void launchLocationPickerDialog(JSONArray cityList) {
+        AmbiguousLocationDialogFragment fragment = new AmbiguousLocationDialogFragment();
+        Bundle bundle = new Bundle();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        bundle.putString("cityList", cityList.toString());
+        fragment.setArguments(bundle);
+
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fragmentTransaction.add(android.R.id.content, fragment)
+                .addToBackStack(null).commit();
+    }
+
+    private void saveLocation(String result) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        recentCityId = preferences.getString("cityId", "India");
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("cityId", result);
+
+        editor.commit();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void getTodayWeather() {
+        new TodayWeatherTask(this, this, progressDialog).execute();
+    }
+
+    private void getLongTermWeather() {
+        new LongTermWeatherTask(this, this, progressDialog).execute();
+    }
+
+    public void refreshWeather() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        String cityId = sp.getString("cityId", "");
+        new TodayWeatherTask(this, this, progressDialog).execute("cc", cityId);
+        new LongTermWeatherTask(this, this, progressDialog).execute("cc", cityId);
+        //checkWeather();
+    }
+
+    private boolean shouldUpdate() {
+        long lastUpdate = PreferenceManager.getDefaultSharedPreferences(this).getLong("lastUpdate", -1);
+        boolean cityChanged = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("cityChanged", false);
+        // Update if never checked or last update is longer ago than specified threshold
+        return cityChanged || lastUpdate < 0 || (Calendar.getInstance().getTimeInMillis() - lastUpdate) > 30000;
+    }
+
+    class FindCityByNameTask extends GenericRequestWeather {
+
+        public FindCityByNameTask(Context context, MainActivity mainActivity, ProgressDialog progressDialog) {
+            super(context, mainActivity, progressDialog);
+        }
+
+        @Override
+        protected ParseResult parseResponse(String response) {
+            try {
+                JSONObject reader = new JSONObject(response);
+
+                final String code = reader.optString("cod");
+                if ("404".equals(code)) {
+                    Log.e("Geolocation", "No city found");
+                    return ParseResult.CITY_NOT_FOUND;
+                }
+
+                final JSONArray cityList = reader.getJSONArray("list");
+
+                if (cityList.length() > 1) {
+                    launchLocationPickerDialog(cityList);
+                } else {
+                    saveLocation(cityList.getJSONObject(0).getString("id"));
+                }
+
+            } catch (JSONException e) {
+                Log.e("JSONException Data", response);
+                e.printStackTrace();
+                return ParseResult.JSON_EXCEPTION;
+            }
+
+            return ParseResult.OK;
+        }
+
+        @Override
+        protected String getAPIName() {
+            return "find";
+        }
+
+        @Override
+        protected void onPostExecute(TaskOutput output) {
+            /* Handle possible errors only */
+            handleTaskOutput(output);
+            refreshWeather();
+            updateMainUI();
+        }
+
+        @Override
+        protected void updateMainUI() {
+            updateTodayWeatherUI();
+            updateLongTermWeatherUI();
+//            updateLastUpdateTime();
+//            updateUVIndexUI();
         }
     }
 }
