@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         // Set SearchView
         searchView = findViewById(R.id.search_view);
 
-
         // Set up viewpager and tab
         todayTemperature = (TextView) findViewById(R.id.todayTemperature);
         todayDescription = (TextView) findViewById(R.id.todayDescription);
@@ -147,7 +146,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         int height = size.y;
         int orientation = getResources().getConfiguration().orientation;
 
-
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // In landscape
             behavior.setPeekHeight((height/6-80));
@@ -156,6 +154,18 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             behavior.setPeekHeight((height/4+50));
         }
 
+        progressDialog = new ProgressDialog(MainActivity.this);
+
+        //format
+        formatIcon = new FormatIcon(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        updateTodayWeatherUI();
+       // updateLongTermWeatherUI();
+        //updateUVIndexUI();
     }
 
     @Override
