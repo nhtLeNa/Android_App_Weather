@@ -179,7 +179,7 @@ public abstract class GenericRequestWeather extends AsyncTask<String, String, Ta
             final String cityId = sp.getString("cityId", Common.DEFAULT_CITY_ID);
             urlBuilder.append("id=").append(URLEncoder.encode(cityId, "UTF-8"));
         }
-        urlBuilder.append("&lang=").append(getLanguage());
+        urlBuilder.append("&lang=").append("en");
         urlBuilder.append("&mode=json");
         urlBuilder.append("&appid=").append(apiKey);
 
