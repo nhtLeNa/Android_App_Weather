@@ -9,6 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myweather.Activities.MainActivity;
+import com.example.myweather.Model.Weather;
+import com.example.myweather.Model.WeatherViewHolder;
+import com.example.myweather.R;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
