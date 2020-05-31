@@ -58,11 +58,6 @@
 
     <style name="AppTheme.NoStatusBar" parent="AppTheme.NoActionBar"></style>
 
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <style name="AppTheme.NoActionBar.Classic" parent="AppTheme.Classic">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -134,6 +129,15 @@
         <item name="android:textColorPrimary">#000</item>
         <!--dialog background-->
         <item name="android:windowBackground">@drawable/background_dialog</item>
+    </style>
+    
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+    
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
     </style>
 
 </resources>
