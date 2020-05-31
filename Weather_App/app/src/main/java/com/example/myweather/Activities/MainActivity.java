@@ -163,8 +163,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     @Override
     public void onStart() {
         super.onStart();
-        updateTodayWeatherUI();
-       // updateLongTermWeatherUI();
+        new TodayWeatherTask(this, this, progressDialog).execute();
+        updateLongTermWeatherUI();
+        new LongTermWeatherTask(this, this, progressDialog).execute();
         //updateUVIndexUI();
     }
 
@@ -573,9 +574,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @SuppressLint("ClickableViewAccessibility")
     private void updateLongTermWeatherUI() {
-//        if (destroyed) {
-//            return;
-//        }
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         Bundle bundleToday = new Bundle();
