@@ -2,6 +2,8 @@ package com.example.myweather.Model;
 
 import android.content.Context;
 
+import com.example.myweather.R;
+
 public enum WindDirection {
 
     NORTH, NORTH_NORTH_EAST, NORTH_EAST, EAST_NORTH_EAST,
