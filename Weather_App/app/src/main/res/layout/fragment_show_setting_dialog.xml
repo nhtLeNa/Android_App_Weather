@@ -83,7 +83,22 @@
         android:textColor="@color/black"
         android:textSize="14sp" />
 
-
+    <TextView
+        android:id="@+id/maps"
+        android:paddingLeft="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_16"
+        android:clickable="true"
+        android:background="@drawable/ripple_text"
+        android:drawablePadding="@dimen/dp_32"
+        android:drawableStart="@drawable/maps"
+        android:drawableTint="#505050"
+        android:gravity="start|center_vertical"
+        android:text="Maps"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/graph"

@@ -50,7 +50,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -98,12 +97,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private FormatIcon formatIcon;
 
     //String
-    private String wetaherArray[]={"Thunderstorm accompanied by gusty winds and lightning is expected in several parts.","Thunderstorm accompanied by gusty winds, rain and lightning is expected in several parts.","Heavy thunderstorm sounds, relaxing pouring rain & lightning.",
-            "Thunderstorm accompanied by gusty winds and lightning is expected in several parts.","Snow falling soundlessly in the middle of the night will always fill my heart with sweet clarity.","And when it rains on your parade, look up rather than down. Without the rain, there would be no rainbow.",
-            "Some people feel the rain. Others just get wet.","I saw old autumn in the misty morn Stand shadowless like silence, listening To silence.","DUST STORM TO DETERIORATE AIR QUALITY IN SEVERAL REGION.",
-            "Haze, pollution causing low visibility over several parts.","Another foogy day and patchy morning with minimum temperature likely to go down.",
-            "Sudden, sharp increase in wind speed lasting minutes with the possibility of rain.","Severe weather brings a tornado, flooding and hail to the region.",
-            "You can plan whether to observe galaxies or planets or stay home and process image data.","No clouds; just a bright sunny day.","Volcano violently erupts spewing ash and smoke into the sky.",
+    private String[] wetaherArray = {"Thunderstorm accompanied by gusty winds and lightning is expected in several parts.", "Thunderstorm accompanied by gusty winds, rain and lightning is expected in several parts.", "Heavy thunderstorm sounds, relaxing pouring rain & lightning.",
+            "Thunderstorm accompanied by gusty winds and lightning is expected in several parts.", "Snow falling soundlessly in the middle of the night will always fill my heart with sweet clarity.", "And when it rains on your parade, look up rather than down. Without the rain, there would be no rainbow.",
+            "Some people feel the rain. Others just get wet.", "I saw old autumn in the misty morn Stand shadowless like silence, listening To silence.", "DUST STORM TO DETERIORATE AIR QUALITY IN SEVERAL REGION.",
+            "Haze, pollution causing low visibility over several parts.", "Another foogy day and patchy morning with minimum temperature likely to go down.",
+            "Sudden, sharp increase in wind speed lasting minutes with the possibility of rain.", "Severe weather brings a tornado, flooding and hail to the region.",
+            "You can plan whether to observe galaxies or planets or stay home and process image data.", "No clouds; just a bright sunny day.", "Volcano violently erupts spewing ash and smoke into the sky.",
             "Fraction of the sky obscured by clouds, possibilty of rain. "};
     private ProgressDialog progressDialog;
 
@@ -125,21 +124,21 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         searchView = findViewById(R.id.search_view);
 
         // Set up viewpager and tab
-        todayTemperature = (TextView) findViewById(R.id.todayTemperature);
-        todayDescription = (TextView) findViewById(R.id.todayDescription);
-        todaydes=findViewById(R.id.todayDes);
-        todayWind = (TextView) findViewById(R.id.todayWind);
-        todayPressure = (TextView) findViewById(R.id.todayPressure);
-        todayHumidity = (TextView) findViewById(R.id.todayHumidity);
-        todaySunrise = (TextView) findViewById(R.id.todaySunrise);
-        todaySunset = (TextView) findViewById(R.id.todaySunset);
-        todayUvIndex = (TextView) findViewById(R.id.todayUvIndex);
-        lastUpdate = (TextView) findViewById(R.id.lastUpdate);
-        mainLay=findViewById(R.id.main);
-        citytool=findViewById(R.id.citytool);
-        peekLayout=findViewById(R.id.peeklayout);
+        todayTemperature = findViewById(R.id.todayTemperature);
+        todayDescription = findViewById(R.id.todayDescription);
+        todaydes = findViewById(R.id.todayDes);
+        todayWind = findViewById(R.id.todayWind);
+        todayPressure = findViewById(R.id.todayPressure);
+        todayHumidity = findViewById(R.id.todayHumidity);
+        todaySunrise = findViewById(R.id.todaySunrise);
+        todaySunset = findViewById(R.id.todaySunset);
+        todayUvIndex = findViewById(R.id.todayUvIndex);
+        lastUpdate = findViewById(R.id.lastUpdate);
+        mainLay = findViewById(R.id.main);
+        citytool = findViewById(R.id.citytool);
+        peekLayout = findViewById(R.id.peeklayout);
         todayIcon = findViewById(R.id.todayIcon);
-        currdate=findViewById(R.id.todayDate);
+        currdate = findViewById(R.id.todayDate);
 
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabs);
@@ -153,10 +152,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // In landscape
-            behavior.setPeekHeight((height/6-80));
+            behavior.setPeekHeight((height / 6 - 80));
         } else {
             // In portrait
-            behavior.setPeekHeight((height/4+50));
+            behavior.setPeekHeight((height / 4 + 50));
         }
 
         progressDialog = new ProgressDialog(MainActivity.this);
@@ -208,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     @Override
     public void onStart() {
         super.onStart();
- //       new TodayWeatherTask(this, this, progressDialog).execute();
+        //       new TodayWeatherTask(this, this, progressDialog).execute();
 //        updateLongTermWeatherUI();
         new LongTermWeatherTask(this, this, progressDialog).execute();
         //updateUVIndexUI();
@@ -272,12 +271,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     }
 
+    @Override
+    public void onMapsClick() {
+        Intent intent = new Intent(this, Maps.class);
+        startActivity(intent);
+    }
+
     public static long saveLastUpdateTime(SharedPreferences defaultSharedPreferences) {
         Calendar now = Calendar.getInstance();
         defaultSharedPreferences.edit().putLong("lastUpdate", now.getTimeInMillis()).commit();
         return now.getTimeInMillis();
     }
-
 
 
     // Location change
@@ -354,18 +358,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     private String getTimeFromAndroid() {
         Date dt = new Date();
-        String time="";
+        String time = "";
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
         int hours = c.get(Calendar.HOUR_OF_DAY);
-        if(hours>=1 && hours<5){
+        if (hours >= 1 && hours < 5) {
             time = "dark";
-        }else if(hours>=5 && hours<12){
+        } else if (hours >= 5 && hours < 12) {
             time = "day";
-        }
-        else if(hours>=12 && hours<19){
+        } else if (hours >= 12 && hours < 19) {
             time = "day";
-        }else if(hours>=19 && hours<24){
+        } else if (hours >= 19 && hours < 24) {
             time = "night";
         }
         return time;
@@ -373,174 +376,137 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     private String getIntervalAndroid() {
         Date dt = new Date();
-        String time="";
+        String time = "";
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
         int hours = c.get(Calendar.HOUR_OF_DAY);
-        if(hours>=1 && hours<5){
-            time="night";
-        }
-        else if(hours>=5 && hours<=6) {
-            time="dawn";
-        }else if(hours>6 && hours<12){
-            time="morning";
-        }
-        else if(hours>=12 && hours<16){
-            time="afternoon";
-        }else if(hours>=16 && hours<18){
-            time="evening";
-        }
-        else if(hours>=18 && hours<19){
-            time="dusk";
-        }
-        else if(hours>=19 && hours<=24){
-            time="night";
+        if (hours >= 1 && hours < 5) {
+            time = "night";
+        } else if (hours >= 5 && hours <= 6) {
+            time = "dawn";
+        } else if (hours > 6 && hours < 12) {
+            time = "morning";
+        } else if (hours >= 12 && hours < 16) {
+            time = "afternoon";
+        } else if (hours >= 16 && hours < 18) {
+            time = "evening";
+        } else if (hours >= 18 && hours < 19) {
+            time = "dusk";
+        } else if (hours >= 19 && hours <= 24) {
+            time = "night";
         }
         return time;
     }
 
-    private void checkWeather(){
+    private void checkWeather() {
         String cond = todayWeather.getDescription().toLowerCase();
         String time = getTimeFromAndroid();
-        if(cond.contains("thunderstorm")){
+        if (cond.contains("thunderstorm")) {
             todaydes.setText("Thunderstorm accompanied by gusty winds and lightning is expected in several parts.");
-            if(time.equals("day")){
+            if (time.equals("day")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.stormday));
 
-            }else if(time.equals("night")){
+            } else if (time.equals("night")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.stormnight));
             }
-        }
-        else if(cond.contains("drizzle")){
+        } else if (cond.contains("drizzle")) {
             todaydes.setText("Isolated Rain Cools down Few regions, While Others Remain Hotter");
-            if(time.equals("day")){
+            if (time.equals("day")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.lightraindrops));
-            }else if(time.equals("night")){
+            } else if (time.equals("night")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.lightrain));
 
             }
-        }
-        else if(cond.contains("rain")){
+        } else if (cond.contains("rain")) {
             todaydes.setText("Isolated Rain Cools down Few regions, While Others Remain Hotter");
-            if(time.equals("day")){
+            if (time.equals("day")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.stormday));
-                ;
-            }else if(time.equals("night")){
+            } else if (time.equals("night")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.rainnight));
-                ;
             }
-        }
-        else if(cond.contains("snow")){
+        } else if (cond.contains("snow")) {
 
             todaydes.setText("Time Lapse Ride Through Snow-Covered Streets of the city.");
-            if(time.equals("day")){
+            if (time.equals("day")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.showersleet));
-                ;
-            }else if(time.equals("night")){
+            } else if (time.equals("night")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.snownight));
-                ;
             }
-        }
-        else if(cond.contains("mist")){
+        } else if (cond.contains("mist")) {
             todaydes.setText("Time Lapse Ride Through mist covered areas of the city.");
-            if(time.equals("day")){
+            if (time.equals("day")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.fog));
-                ;
-            }else if(time.equals("night")){
+            } else if (time.equals("night")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.mist));
-                ;
             }
-        }
-        else if(cond.contains("smoke")){
+        } else if (cond.contains("smoke")) {
             todaydes.setText("DUST STORM TO DETERIORATE AIR QUALITY IN SEVERAL REGION.");
-            if(time.equals("day")){
+            if (time.equals("day")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.duskclouds));
-                ;
-            }else if(time.equals("night")){
+            } else if (time.equals("night")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.wind));
-                ;
             }
-        }
-        else if(cond.contains("haze")||  cond.contains("clear")){
+        } else if (cond.contains("haze") || cond.contains("clear")) {
             todaydes.setText("Clear and blithe day with no clouds in the sky.");
             String interval = getIntervalAndroid();
-            switch(interval){
+            switch (interval) {
                 case "night":
                     todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.mist));
-                    ;
                     break;
                 case "morning":
                     todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.sunset));
-                    ;
                     break;
                 case "afternoon":
                     todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.sunny));
-                    ;
                     break;
                 case "evening":
                     todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.evening));
-                    ;
                     break;
                 case "dusk":
                     todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.sunset));
                     break;
                 case "dawn":
                     todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.sunrise));
-                    ;
                     break;
                 default:
                     break;
             }
-        }
-        else if(cond.equals("dust") || cond.contains("sand")){
+        } else if (cond.equals("dust") || cond.contains("sand")) {
             todaydes.setText("Dust storm to deteriorate air quality in several region.");
-            if(time.equals("day")){
+            if (time.equals("day")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.dustday));
 
-            }else if(time.equals("night")){
+            } else if (time.equals("night")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.sand));
-                ;
             }
-        }
-        else if(cond.contains("fog")){
+        } else if (cond.contains("fog")) {
             todaydes.setText("Another foogy day with minimum temperature likely to go down.");
-            if(time.equals("day")){
+            if (time.equals("day")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.fog));
-                ;
-            }else if(time.equals("night")){
+            } else if (time.equals("night")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.fognight));
-                ;
             }
-        }
-        else if(cond.contains("ash")){
+        } else if (cond.contains("ash")) {
             todaydes.setText("Volcano violently erupts spewing ash and smoke into the sky.");
-            if(time.equals("day")){
+            if (time.equals("day")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.duskclouds));
-                ;
-            }else if(time.equals("night")){
+            } else if (time.equals("night")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.fognight));
-                ;
             }
-        }
-        else if(cond.contains("squall")){
+        } else if (cond.contains("squall")) {
             todaydes.setText("Sudden, sharp increase in wind speed lasting minutes with the possibility of rain.");
-            if(time.equals("day")){
+            if (time.equals("day")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.squall));
-                ;
-            }else if(time.equals("night")){
+            } else if (time.equals("night")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.squall));
-                ;
             }
-        }
-        else if(cond.contains("clouds")) {
+        } else if (cond.contains("clouds")) {
             todaydes.setText("Fraction of the sky obscured by clouds, possibilty of rain.");
-            if(cond.equals("few clouds")|| cond.equals("scattered clouds")){
+            if (cond.equals("few clouds") || cond.equals("scattered clouds")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.scatteredclouds));
-            }
-            else if(cond.equals("broken clouds")){
+            } else if (cond.equals("broken clouds")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.brokenclouds));
-            }
-            else if(cond.equals("overcast clouds")){
+            } else if (cond.equals("overcast clouds")) {
                 todayIcon.setImageDrawable(getResources().getDrawable(R.drawable.evening));
             }
         }
@@ -562,7 +528,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         String city = todayWeather.getCity();
         String country = todayWeather.getCountry();
         DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getApplicationContext());
-        citytool.setText(city +" ,"+country);
+        citytool.setText(city + " ," + country);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 
@@ -602,12 +568,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                     localize(sp, "speedUnit", "m/s") +
                     (todayWeather.isWindDirectionAvailable() ? " " + getWindDirectionString(sp, this, todayWeather) : ""));
         }
-        todayPressure.setText( new DecimalFormat("0.0").format(pressure) + " " +
+        todayPressure.setText(new DecimalFormat("0.0").format(pressure) + " " +
                 localize(sp, "pressureUnit", "hPa"));
         todayHumidity.setText(todayWeather.getHumidity() + " %");
         todaySunrise.setText(timeFormat.format(todayWeather.getSunrise()));
         todaySunset.setText(timeFormat.format(todayWeather.getSunset()));
-        citytool=findViewById(R.id.citytool);
+        citytool = findViewById(R.id.citytool);
         citytool.setText(city);
         checkWeather();
         todayIcon.setOnClickListener(new View.OnClickListener() {

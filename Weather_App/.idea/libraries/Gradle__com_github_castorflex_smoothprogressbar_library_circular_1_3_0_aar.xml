@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.castorflex.smoothprogressbar:library-circular:1.3.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eaa9cf1536e26030222971e07fad0fad/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4726eeeccc139375d07ca7b7cd2aee6/jetified-library-circular-1.3.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eaa9cf1536e26030222971e07fad0fad/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eaa9cf1536e26030222971e07fad0fad/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4726eeeccc139375d07ca7b7cd2aee6/jetified-library-circular-1.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4726eeeccc139375d07ca7b7cd2aee6/jetified-library-circular-1.3.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.castorflex.smoothprogressbar/library-circular/1.3.0/d4bc4679dbda5a68248b90448e91f77aff003631/library-circular-1.3.0-javadoc.jar!/" />

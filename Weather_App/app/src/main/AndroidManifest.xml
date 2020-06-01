@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCM_HbA0iA-GpMWTd2rx7J5j-3BlCdrzWA" />
 
         <activity android:name=".Activities.SplashActivity">
             <intent-filter>
@@ -27,6 +30,7 @@
         <activity android:name=".Activities.LoadingActivity"/>
         <activity android:name=".Activities.first_activity"/>
         <activity android:name=".Activities.MainActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activities.Maps"/>
     </application>
 
 </manifest>

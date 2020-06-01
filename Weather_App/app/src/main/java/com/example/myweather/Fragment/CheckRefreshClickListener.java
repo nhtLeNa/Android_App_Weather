@@ -7,4 +7,5 @@ public interface CheckRefreshClickListener {
         void onSettingsClick();
         void onAboutClick();
         void onRefresh();
+        void onMapsClick();
 }

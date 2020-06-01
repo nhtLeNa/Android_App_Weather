@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: biz.laenger.android:vpbs:0.0.5@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/028d035ab92503584142e5034ae11c72/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7259f486626c9aa3546c386ad79a95c7/jetified-vpbs-0.0.5/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/028d035ab92503584142e5034ae11c72/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/028d035ab92503584142e5034ae11c72/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7259f486626c9aa3546c386ad79a95c7/jetified-vpbs-0.0.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7259f486626c9aa3546c386ad79a95c7/jetified-vpbs-0.0.5/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -1,10 +1,7 @@
-#Sun May 31 18:35:53 ICT 2020
-path.2=classes.dex
+#Mon Jun 01 23:13:56 ICT 2020
+base.0=C\:\\Users\\nguye\\AndroidStudioProjects\\Android_App_Weather\\Weather_App\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
 path.1=classes.dex
-path.0=classes.dex
-renamed.2=classes3.dex
 renamed.1=classes2.dex
+path.0=classes.dex
 renamed.0=classes.dex
-base.2=/Users/huananductri/Desktop/android backup/Weather_App/app/build/intermediates/transforms/dexMerger/debug/2
-base.1=/Users/huananductri/Desktop/android backup/Weather_App/app/build/intermediates/transforms/dexMerger/debug/1
-base.0=/Users/huananductri/Desktop/android backup/Weather_App/app/build/intermediates/transforms/dexMerger/debug/0
+base.1=C\:\\Users\\nguye\\AndroidStudioProjects\\Android_App_Weather\\Weather_App\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
