@@ -46,7 +46,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
         spinner = findViewById(R.id.tileType);
 
-        String[] tileName = new String[]{"Clouds", "Temperature", "Precipitations", "Snow", "Rain", "Wind", "Sea level press."};
+        String[] tileName = new String[]{"Mây", "Nhiệt độ", "Lượng mưa", "Tuyết", "Mưa", "Gió", "Mực nước biển"};
 
         ArrayAdapter adpt = new ArrayAdapter(this, android.R.layout.simple_spinner_item, tileName);
 
