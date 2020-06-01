@@ -1,0 +1,58 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/blackicon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/sunrise"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        android:layout_below="@id/blackicon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/appname"
+        android:textColor="#000"
+        android:text="AhihiForecast v1.0"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_below="@id/appname"
+        android:layout_centerHorizontal="true"
+        android:typeface="monospace"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:id="@+id/compname"
+        android:textColor="#000"
+        android:text="HCMUS-FIT GROUP 06 \u00AE"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:theme="@style/AppTheme.Button"
+        android:text="Got it!"
+        android:textSize="14sp"
+        android:paddingRight="20dp"
+        android:visibility="visible"
+        android:paddingLeft="20dp"
+        android:id="@+id/pixelbutton"
+        android:textColor="@color/white"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_style"
+        android:textAllCaps="false"
+        android:layout_marginTop="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/appname"/>
+</RelativeLayout>
