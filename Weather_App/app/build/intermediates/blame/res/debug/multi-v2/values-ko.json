@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/huananductri/Desktop/android backup/Weather_App/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ko/values-ko.xml",
+            "outputFile": "C:\\Users\\Admin\\Desktop\\Weather\\master replace\\Android_App_Weather\\Weather_App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ko\\values-ko.xml",
             "map": [
                 {
-                    "source": "/Users/huananductri/.gradle/caches/transforms-2/files-2.1/1444190cb554c33335364f608c8415a4/res/values-ko/values-ko.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\b264046ec9cd7f7002638909f92a294d\\res\\values-ko\\values-ko.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/huananductri/.gradle/caches/transforms-2/files-2.1/656bd5c64e5b5160e6dc8cd1f3cc7b44/res/values-ko/values-ko.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\05d66b48b19863141ca87408af962314\\res\\values-ko\\values-ko.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

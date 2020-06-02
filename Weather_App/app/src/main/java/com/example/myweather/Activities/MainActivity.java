@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationListener;
@@ -13,6 +14,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
@@ -22,13 +24,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.myweather.Adapter.ViewPagerAdapter;
 import com.example.myweather.Adapter.WeatherRecyclerAdapter;
 import com.example.myweather.Fragment.AboutDialogFragment;
@@ -46,6 +58,8 @@ import com.example.myweather.Utils.UnitConvertor;
 import com.google.android.material.tabs.TabLayout;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,11 +67,15 @@ import org.json.JSONObject;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import biz.laenger.android.vpbs.ViewPagerBottomSheetBehavior;
@@ -94,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private TextView currdate;
     private LinearLayout peekLayout;
 
+
     //Util
     private FormatIcon formatIcon;
 
@@ -115,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
+        //setContentView(R.layout.covid_status);
 
         // Set toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -194,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             public void onSearchViewClosed() {
             }
         });
+
     }
 
     @Override
@@ -270,6 +291,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     @Override
     public void onRefresh() {
 
+    }
+
+    @Override
+    public void onCovid() {
+        this.startActivity(new Intent(MainActivity.this, CovidStatusActivity.class));
     }
 
     public static long saveLastUpdateTime(SharedPreferences defaultSharedPreferences) {
@@ -993,4 +1019,5 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 //            updateUVIndexUI();
         }
     }
+
 }

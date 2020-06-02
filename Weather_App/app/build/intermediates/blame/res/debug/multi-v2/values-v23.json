@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/huananductri/Desktop/android backup/Weather_App/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
+            "outputFile": "C:\\Users\\Admin\\Desktop\\Weather\\master replace\\Android_App_Weather\\Weather_App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
-                    "source": "/Users/huananductri/.gradle/caches/transforms-2/files-2.1/1444190cb554c33335364f608c8415a4/res/values-v23/values-v23.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\b264046ec9cd7f7002638909f92a294d\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,19,32,33,34,35,36",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "source": "/Users/huananductri/.gradle/caches/transforms-2/files-2.1/2aceef41a97b9992f62e482a16d36640/res/values-v23/values-v23.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\b197aed17b163a9a2c79349497d83342\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

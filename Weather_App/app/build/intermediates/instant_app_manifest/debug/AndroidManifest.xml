@@ -38,6 +38,7 @@
         <activity
             android:name="com.example.myweather.Activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.example.myweather.Activities.CovidStatusActivity" />
 
         <provider
             android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"

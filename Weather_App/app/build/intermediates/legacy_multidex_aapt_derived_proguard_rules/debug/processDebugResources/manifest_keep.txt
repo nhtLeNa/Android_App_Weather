@@ -1,4 +1,4 @@
-# Referenced at /Users/huananductri/Desktop/android backup/Weather_App/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:17
+# Referenced at C:\Users\Admin\Desktop\Weather\master replace\Android_App_Weather\Weather_App\app\build\intermediates\merged_manifests\debug\AndroidManifest.xml:17
 -keep class androidx.core.app.CoreComponentFactory { <init>(); }
-# Referenced at /Users/huananductri/Desktop/android backup/Weather_App/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:17
+# Referenced at C:\Users\Admin\Desktop\Weather\master replace\Android_App_Weather\Weather_App\app\build\intermediates\merged_manifests\debug\AndroidManifest.xml:17
 -keep class androidx.multidex.MultiDexApplication { <init>(); }

@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: biz.laenger.android:vpbs:0.0.5@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/028d035ab92503584142e5034ae11c72/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/864c05174512df3bb5b20fa442e142d1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/028d035ab92503584142e5034ae11c72/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/028d035ab92503584142e5034ae11c72/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/864c05174512df3bb5b20fa442e142d1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/864c05174512df3bb5b20fa442e142d1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

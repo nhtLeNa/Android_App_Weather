@@ -50,7 +50,6 @@ public class first_activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(first_activity.this, LoadingActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

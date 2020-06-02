@@ -27,6 +27,7 @@
         <activity android:name=".Activities.LoadingActivity"/>
         <activity android:name=".Activities.first_activity"/>
         <activity android:name=".Activities.MainActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activities.CovidStatusActivity"/>
     </application>
 
 </manifest>

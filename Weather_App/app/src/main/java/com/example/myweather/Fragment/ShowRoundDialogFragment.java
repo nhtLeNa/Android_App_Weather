@@ -14,13 +14,14 @@ import com.example.myweather.Activities.RoundedBottomSheet;
 import com.example.myweather.R;
 
 public class ShowRoundDialogFragment extends RoundedBottomSheet {
-    public TextView refreshTextView, graphTextView, locationTextView, settingsTextView, shareTextView, aboutTextView;
+    public TextView refreshTextView, graphTextView, locationTextView, settingsTextView, shareTextView, aboutTextView, covidTextView;
     private CheckRefreshClickListener mCheckGraphListener;
     private CheckRefreshClickListener mCheckAutoDetectListener;
     private CheckRefreshClickListener mCheckSettingsListener;
     private CheckRefreshClickListener mCheckAboutListener;
     private CheckRefreshClickListener mCheckShareListener;
     private CheckRefreshClickListener mCheckRefresh;
+    private CheckRefreshClickListener mCheckCovid;
 
     public static ShowRoundDialogFragment newInstance() {
         return new ShowRoundDialogFragment();
@@ -46,6 +47,7 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
         mCheckShareListener = (CheckRefreshClickListener) context;
         mCheckAutoDetectListener = (CheckRefreshClickListener) context;
         mCheckRefresh = (CheckRefreshClickListener) context;
+        mCheckCovid = (CheckRefreshClickListener) context;
     }
 
     @Override
@@ -62,6 +64,9 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
         aboutTextView.setOnClickListener(v -> mCheckAboutListener.onAboutClick());
         shareTextView.setOnClickListener(v -> mCheckShareListener.onShareClick());
         refreshTextView.setOnClickListener(v->mCheckRefresh.onRefresh());
+
+        covidTextView = getView().findViewById(R.id.covid);
+        covidTextView.setOnClickListener(v -> mCheckCovid.onCovid());
         super.onViewCreated(view, savedInstanceState);
     }
 }
