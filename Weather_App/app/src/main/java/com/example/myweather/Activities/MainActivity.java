@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.net.ConnectivityManager;
@@ -43,6 +45,7 @@ import com.example.myweather.Task.ParseResult;
 import com.example.myweather.Task.TaskOutput;
 import com.example.myweather.Utils.FormatIcon;
 import com.example.myweather.Utils.UnitConvertor;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.tabs.TabLayout;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -50,6 +53,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -95,6 +99,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     //Util
     private FormatIcon formatIcon;
+
+    // Lat and lng for map
+    Float lat;
+    Float lon;
 
     //String
     private String[] wetaherArray = {"Thunderstorm accompanied by gusty winds and lightning is expected in several parts.", "Thunderstorm accompanied by gusty winds, rain and lightning is expected in several parts.", "Heavy thunderstorm sounds, relaxing pouring rain & lightning.",
@@ -193,26 +201,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             public void onSearchViewClosed() {
             }
         });
+        preloadWeather();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (shouldUpdate() && isNetworkAvailable()) {
-            getTodayWeather();
-            getLongTermWeather();
-        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        //       new TodayWeatherTask(this, this, progressDialog).execute();
-//        updateLongTermWeatherUI();
-        new LongTermWeatherTask(this, this, progressDialog).execute();
-        //updateUVIndexUI();
-        updateTodayWeatherUI();
-//        updateLongTermWeatherUI();
     }
 
     @Override
@@ -583,7 +582,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 startActivity(intent);
             }
         });
+
+        sendLatLon();
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private void updateLongTermWeatherUI() {
@@ -957,6 +959,33 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             updateLongTermWeatherUI();
 //            updateLastUpdateTime();
 //            updateUVIndexUI();
+        }
+    }
+
+    public void sendLatLon() {
+        if (Geocoder.isPresent()) {
+            try {
+                String location = (String) citytool.getText();
+                System.out.println("[location] " + location);
+                Geocoder geocoder = new Geocoder(MainActivity.this);
+                List<Address> addresses = geocoder.getFromLocationName(location, 5);
+
+                List<LatLng> latLngs = new ArrayList<>(addresses.size());
+                for (Address address : addresses) {
+                    if (address.hasLongitude() && address.hasLatitude()) {
+                        lon = (float) address.getLongitude();
+                        lat = (float) address.getLatitude();
+                    }
+                }
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit();
+                editor.putFloat("Lon", lon);
+                editor.putFloat("Lat", lat);
+                System.out.println("[lon, lat]" + lon + ", " + lat);
+                editor.commit();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

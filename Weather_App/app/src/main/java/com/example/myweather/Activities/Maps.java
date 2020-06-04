@@ -2,10 +2,12 @@ package com.example.myweather.Activities;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,6 +36,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     TileOverlay tileOver;
     LocationManager locationManager;
     Location location;
+    float lon;
+    float lat;
     private static final int REQUEST_CODE = 101;
 
     @Override
@@ -89,6 +93,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                 if (mMap != null) {
                     if (tileOver != null)
                         tileOver.remove();
+                    System.out.println("con cac o tren");
                     setUpMap();
                 }
 
@@ -121,10 +126,22 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        //LatLng vietnam = new LatLng(location.getLatitude(), location.getLatitude());
-        LatLng vietnam = new LatLng(10.762622, 106.660172);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        lat = sp.getFloat("Lat", lat);
+        lon = sp.getFloat("Lon", lon);
+        System.out.println("lat, lon 2 " + lat + " " + lon);
+        LatLng vietnam = new LatLng(lat, lon);
         mMap.addMarker(new MarkerOptions().position(vietnam).title("Marker in Vietnam"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(vietnam));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mMap != null) {
+            mMap.clear();
+        }
     }
 
     private void setUpMap() {
