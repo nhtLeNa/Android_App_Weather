@@ -6,10 +6,13 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.myweather.AirVisual.HTTPHandler;
 import com.example.myweather.R;
@@ -99,6 +102,14 @@ public class AirVisual extends Activity {
         wind_direction = findViewById(R.id.airvisual_wind_direction);
         timestamp = findViewById(R.id.airvisual_timestamp);
         icon = findViewById(R.id.airvisual_icon);
+
+        Toolbar toolbar = findViewById(R.id.airvisual_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AirVisual.this.finish();
+            }
+        });
 
         information = new ArrayList<>();
         new GetAQI().execute();

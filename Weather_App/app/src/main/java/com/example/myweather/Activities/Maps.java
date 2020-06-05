@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.myweather.Maps.TransparentTile;
@@ -38,7 +39,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
         spinner = findViewById(R.id.tileType);
 
         String[] tileName = new String[]{"Mây", "Nhiệt độ", "Lượng mưa", "Tuyết", "Mưa", "Gió", "Mực nước biển"};
@@ -87,6 +87,14 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                     setUpMap();
                 }
 
+            }
+        });
+
+        Toolbar toolbar = findViewById(R.id.maps_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Maps.this.finish();
             }
         });
     }
