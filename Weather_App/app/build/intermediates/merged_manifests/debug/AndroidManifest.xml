@@ -46,6 +46,7 @@
             android:name="com.example.myweather.Activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.example.myweather.Activities.Maps" />
+        <activity android:name="com.example.myweather.Activities.AirVisual" />
         <!-- Needs to be explicitly declared on P+ -->
         <uses-library
             android:name="org.apache.http.legacy"

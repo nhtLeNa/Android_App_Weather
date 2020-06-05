@@ -14,8 +14,9 @@ import com.example.myweather.Activities.RoundedBottomSheet;
 import com.example.myweather.R;
 
 public class ShowRoundDialogFragment extends RoundedBottomSheet {
-    public TextView refreshTextView, mapsTextView, graphTextView, locationTextView, settingsTextView, shareTextView, aboutTextView;
+    public TextView refreshTextView, mapsTextView, airvisualTextView, graphTextView, locationTextView, settingsTextView, shareTextView, aboutTextView;
     private CheckRefreshClickListener mCheckMapsListener;
+    private CheckRefreshClickListener mCheckAirVisualListener;
     private CheckRefreshClickListener mCheckGraphListener;
     private CheckRefreshClickListener mCheckAutoDetectListener;
     private CheckRefreshClickListener mCheckSettingsListener;
@@ -41,6 +42,7 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
     public void onAttach(Context context) {
         super.onAttach(context);
         mCheckMapsListener = (CheckRefreshClickListener) context;
+        mCheckAirVisualListener = (CheckRefreshClickListener) context;
         mCheckGraphListener = (CheckRefreshClickListener) context;
         mCheckSettingsListener = (CheckRefreshClickListener) context;
         mCheckAboutListener = (CheckRefreshClickListener) context;
@@ -52,6 +54,7 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mapsTextView = getView().findViewById(R.id.maps);
+        airvisualTextView = getView().findViewById(R.id.airvisual);
         graphTextView = getView().findViewById(R.id.graph);
         locationTextView = getView().findViewById(R.id.locationup);
         settingsTextView = getView().findViewById(R.id.settings);
@@ -59,6 +62,7 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
         shareTextView = getView().findViewById(R.id.share);
         refreshTextView = getView().findViewById(R.id.refresh);
         mapsTextView.setOnClickListener(v -> mCheckMapsListener.onMapsClick());
+        airvisualTextView.setOnClickListener(v -> mCheckAirVisualListener.onAirVisualClick());
         graphTextView.setOnClickListener(v -> mCheckGraphListener.onGraphClick());
         locationTextView.setOnClickListener(v -> mCheckAutoDetectListener.onUpdateClick());
         settingsTextView.setOnClickListener(v -> mCheckSettingsListener.onSettingsClick());

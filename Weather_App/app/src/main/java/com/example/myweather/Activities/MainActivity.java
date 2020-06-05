@@ -276,6 +276,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         startActivity(intent);
     }
 
+    @Override
+    public void onAirVisualClick() {
+        Intent intent = new Intent(this, AirVisual.class);
+        startActivity(intent);
+    }
+
     public static long saveLastUpdateTime(SharedPreferences defaultSharedPreferences) {
         Calendar now = Calendar.getInstance();
         defaultSharedPreferences.edit().putLong("lastUpdate", now.getTimeInMillis()).commit();

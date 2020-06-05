@@ -8,4 +8,5 @@ public interface CheckRefreshClickListener {
         void onAboutClick();
         void onRefresh();
         void onMapsClick();
+        void onAirVisualClick();
 }

@@ -1,7 +1,7 @@
-#Thu Jun 04 21:15:31 ICT 2020
-base.0=/Users/huananductri/Desktop/Android_App_Weather/Weather_App/app/build/intermediates/dex/debug/mergeExtDexDebug/out/classes.dex
+#Fri Jun 05 07:50:58 ICT 2020
+base.0=C\:\\Users\\nguye\\AndroidStudioProjects\\Android_App_Weather\\Weather_App\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=/Users/huananductri/Desktop/Android_App_Weather/Weather_App/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex
+base.1=C\:\\Users\\nguye\\AndroidStudioProjects\\Android_App_Weather\\Weather_App\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex

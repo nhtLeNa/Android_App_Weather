@@ -18,7 +18,7 @@ public class TransparentTile implements TileProvider {
     private Paint opacityPaint = new Paint();
     private String tileType;
 
-    private static final String OWM_TILE_URL = "https://tile.openweathermap.org/map/%s/%d/%d/%d.png?appid=7f04ec9d707085c3a4071198aabdb9de";
+    private static final String MAPS_URL = "https://tile.openweathermap.org/map/%s/%d/%d/%d.png?appid=7f04ec9d707085c3a4071198aabdb9de";
 
     public TransparentTile(String tileType)
     {
@@ -73,7 +73,7 @@ public class TransparentTile implements TileProvider {
 
     private URL getTileUrl(int x, int y, int zoom)
     {
-        String tileUrl = String.format(OWM_TILE_URL, tileType, zoom, x, y);
+        String tileUrl = String.format(MAPS_URL, tileType, zoom, x, y);
         try
         {
             return new URL(tileUrl);
