@@ -1,5 +1,4 @@
 package com.example.myweather.Activities;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -7,10 +6,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
-
 import com.example.myweather.Maps.TransparentTile;
 import com.example.myweather.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -41,7 +38,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
         spinner = findViewById(R.id.tileType);
 
-        String[] tileName = new String[]{"Mây", "Nhiệt độ", "Lượng mưa", "Tuyết", "Mưa", "Gió", "Mực nước biển"};
+        String[] tileName = new String[]{"Clouds", "Temperature", "Precipitation", "Snow", "Rain", "Wind", "Pressure"};
 
         ArrayAdapter adpt = new ArrayAdapter(this, android.R.layout.simple_spinner_item, tileName);
 

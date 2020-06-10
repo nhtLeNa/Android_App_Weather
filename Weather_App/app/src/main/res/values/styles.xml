@@ -56,8 +56,6 @@
         <item name="android:textColorPrimary">@android:color/white</item>
     </style>
 
-    <style name="AppTheme.NoStatusBar" parent="AppTheme.NoActionBar"></style>
-
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -88,17 +86,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="AppTheme.PopupOverlay.Dark" parent="ThemeOverlay.AppCompat" />
-
-    <style name="AppTheme.PopupOverlay.Black" parent="ThemeOverlay.AppCompat">
-        <item name="android:colorBackground">@color/blackTheme_colorBackground</item>
-    </style>
-
-
 
     <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
 
@@ -124,16 +111,6 @@
         <item name="android:textColor">#fff</item>
         <item name="android:typeface">monospace</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-    </style>
-    <style name="CustomDialogTheme" parent="Base.Theme.MaterialComponents.Dialog">
-        <!--buttons color-->
-        <item name="colorAccent">@color/colorPrimary</item>
-        <item name="dialogCornerRadius">3dp</item>
-        <!--title and message color-->
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textColorPrimary">#000</item>
-        <!--dialog background-->
-        <item name="android:windowBackground">@drawable/background_dialog</item>
     </style>
 
 </resources>

@@ -50,18 +50,19 @@
                 android:id="@+id/airvisual_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="N/A"
                 style="@style/TextAppearance.AppCompat.Large"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/airvisual_aqi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="US AQI:"/>
+                android:text="US AQI: N/A"/>
             <TextView
                 android:id="@+id/airvisual_mainus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tác nhân ô nhiễm chính:"/>
+                android:text="Main pollutant: N/A"/>
             <TextView
                 android:id="@+id/airvisual_collusion"
                 android:layout_width="wrap_content"
@@ -84,42 +85,42 @@
             android:id="@+id/airvisual_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thành phố:"/>
+            android:text="City: N/A"/>
         <TextView
             android:id="@+id/airvisual_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quốc gia:"/>
+            android:text="Country: N/A"/>
         <TextView
             android:id="@+id/airvisual_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nhiệt độ:"/>
+            android:text="Temperature: N/A"/>
         <TextView
             android:id="@+id/airvisual_pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Áp suất không khí:"/>
+            android:text="Pressure: N/A"/>
         <TextView
             android:id="@+id/airvisual_humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Độ ẩm:"/>
+            android:text="Humidity: N/A"/>
         <TextView
             android:id="@+id/airvisual_wind_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tốc độ gió:"/>
+            android:text="Wind speed: N/A"/>
         <TextView
             android:id="@+id/airvisual_wind_direction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hướng gió:"/>
+            android:text="Wind direction: N/A"/>
         <TextView
             android:id="@+id/airvisual_timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cập nhật lần cuối:"/>
+            android:text="Last updated: N/A"/>
     </LinearLayout>
 
 
