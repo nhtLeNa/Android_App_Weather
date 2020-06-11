@@ -9,4 +9,5 @@ public interface CheckRefreshClickListener {
         void onRefresh();
         void onMapsClick();
         void onAirVisualClick();
+        void onCovid();
 }

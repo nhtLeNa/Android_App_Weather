@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private FormatIcon formatIcon;
 
     // Lat and lng for map
-    Float lat;
-    Float lon;
+    Float lat = 0f;
+    Float lon = 0f;
 
     //String
     private String[] wetaherArray = {"Thunderstorm accompanied by gusty winds and lightning is expected in several parts.", "Thunderstorm accompanied by gusty winds, rain and lightning is expected in several parts.", "Heavy thunderstorm sounds, relaxing pouring rain & lightning.",
@@ -279,6 +279,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     @Override
     public void onAirVisualClick() {
         Intent intent = new Intent(this, AirVisual.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCovid() {
+        Intent intent = new Intent(this, CovidStatusActivity.class);
         startActivity(intent);
     }
 

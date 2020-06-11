@@ -1,10 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\nguye\\AndroidStudioProjects\\Android_App_Weather\\Weather_App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+            "outputFile": "C:\\Users\\Admin\\Desktop\\Weather\\Android_App_Weather\\Weather_App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\nguye\\.gradle\\caches\\transforms-2\\files-2.1\\7843b97282fccc935fd221c80862bff2\\jetified-bottom-bar-1.4.0.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\b84e1a992b7be887e6ce1c4f319a2668\\appcompat-1.0.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,124,193,263,337,413,472,543",
+                        "endColumns": "68,68,69,73,75,58,70,67",
+                        "endOffsets": "119,188,258,332,408,467,538,606"
+                    },
+                    "to": {
+                        "startLines": "3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "113,182,251,321,395,471,530,601",
+                        "endColumns": "68,68,69,73,75,58,70,67",
+                        "endOffsets": "177,246,316,390,466,525,596,664"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\20bbbd0b57cd69d0cf29c50508bbbc52\\jetified-bottom-bar-1.4.0.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +31,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\nguye\\.gradle\\caches\\transforms-2\\files-2.1\\7e27ba6caaa39f35dee577991b0315ab\\material-1.0.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\7e27ba6caaa39f35dee577991b0315ab\\material-1.0.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,10,11,12",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -30,23 +47,6 @@
                         "endLines": "11,12,13,14,15,16,18,19,20,24",
                         "endColumns": "59,69,70,71,57,57,10,63,62,10",
                         "endOffsets": "724,794,865,937,995,1053,1162,1226,1289,1461"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\nguye\\.gradle\\caches\\transforms-2\\files-2.1\\b84e1a992b7be887e6ce1c4f319a2668\\appcompat-1.0.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,124,193,263,337,413,472,543",
-                        "endColumns": "68,68,69,73,75,58,70,67",
-                        "endOffsets": "119,188,258,332,408,467,538,606"
-                    },
-                    "to": {
-                        "startLines": "3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "113,182,251,321,395,471,530,601",
-                        "endColumns": "68,68,69,73,75,58,70,67",
-                        "endOffsets": "177,246,316,390,466,525,596,664"
                     }
                 }
             ]

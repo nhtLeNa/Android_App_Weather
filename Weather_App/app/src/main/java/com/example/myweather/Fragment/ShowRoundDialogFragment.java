@@ -14,7 +14,7 @@ import com.example.myweather.Activities.RoundedBottomSheet;
 import com.example.myweather.R;
 
 public class ShowRoundDialogFragment extends RoundedBottomSheet {
-    public TextView refreshTextView, mapsTextView, airvisualTextView, graphTextView, locationTextView, settingsTextView, shareTextView, aboutTextView;
+    public TextView refreshTextView, mapsTextView, airvisualTextView, covidTexView, graphTextView, locationTextView, settingsTextView, shareTextView, aboutTextView;
     private CheckRefreshClickListener mCheckMapsListener;
     private CheckRefreshClickListener mCheckAirVisualListener;
     private CheckRefreshClickListener mCheckGraphListener;
@@ -23,6 +23,7 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
     private CheckRefreshClickListener mCheckAboutListener;
     private CheckRefreshClickListener mCheckShareListener;
     private CheckRefreshClickListener mCheckRefresh;
+    private CheckRefreshClickListener mCheckCovid;
 
     public static ShowRoundDialogFragment newInstance() {
         return new ShowRoundDialogFragment();
@@ -49,12 +50,14 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
         mCheckShareListener = (CheckRefreshClickListener) context;
         mCheckAutoDetectListener = (CheckRefreshClickListener) context;
         mCheckRefresh = (CheckRefreshClickListener) context;
+        mCheckCovid = (CheckRefreshClickListener) context;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mapsTextView = getView().findViewById(R.id.maps);
         airvisualTextView = getView().findViewById(R.id.airvisual);
+        covidTexView = getView().findViewById(R.id.covid);
         graphTextView = getView().findViewById(R.id.graph);
         locationTextView = getView().findViewById(R.id.locationup);
         settingsTextView = getView().findViewById(R.id.settings);
@@ -63,6 +66,7 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
         refreshTextView = getView().findViewById(R.id.refresh);
         mapsTextView.setOnClickListener(v -> mCheckMapsListener.onMapsClick());
         airvisualTextView.setOnClickListener(v -> mCheckAirVisualListener.onAirVisualClick());
+        covidTexView.setOnClickListener(v -> mCheckCovid.onCovid());
         graphTextView.setOnClickListener(v -> mCheckGraphListener.onGraphClick());
         locationTextView.setOnClickListener(v -> mCheckAutoDetectListener.onUpdateClick());
         settingsTextView.setOnClickListener(v -> mCheckSettingsListener.onSettingsClick());

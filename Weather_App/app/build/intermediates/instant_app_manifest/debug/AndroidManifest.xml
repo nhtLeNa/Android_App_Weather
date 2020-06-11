@@ -48,6 +48,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.example.myweather.Activities.Maps" />
         <activity android:name="com.example.myweather.Activities.AirVisual" />
+        <activity android:name="com.example.myweather.Activities.CovidStatusActivity" />
+        <activity android:name="com.example.myweather.Activities.CountrySearchActivity" />
+        <activity android:name="com.example.myweather.Activities.CovidStatusCountryActivity" />
         <!-- Needs to be explicitly declared on P+ -->
         <uses-library
             android:name="org.apache.http.legacy"

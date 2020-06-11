@@ -118,6 +118,23 @@
         android:textSize="14sp" />
 
     <TextView
+        android:id="@+id/covid"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:background="@drawable/ripple_text"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_covid"
+        android:drawablePadding="@dimen/dp_32"
+        android:drawableTint="#505050"
+        android:gravity="start|center_vertical"
+        android:paddingLeft="22dp"
+        android:text="Covid"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
         android:id="@+id/graph"
         android:paddingLeft="22dp"
         android:layout_width="match_parent"
