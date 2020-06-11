@@ -1,5 +1,6 @@
 package com.example.myweather.Activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
@@ -122,6 +124,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
+
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
 
         // Set toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -237,7 +242,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @Override
     public void onGraphClick() {
-
+        Intent intent = new Intent(MainActivity.this, GraphActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -267,7 +273,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @Override
     public void onRefresh() {
-
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     @Override
@@ -290,25 +298,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
 
     // Location change
-    @Override
-    public void onLocationChanged(Location location) {
 
-    }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-
-    }
 
     public static String getWindDirectionString(SharedPreferences sp, Context context, Weather weatherItem) {
         return "";
@@ -801,6 +791,26 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         }
 
         return ParseResult.OK;
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 
     class TodayWeatherTask extends GenericRequestWeather {

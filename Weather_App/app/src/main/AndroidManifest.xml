@@ -32,6 +32,7 @@
         <activity android:name=".Activities.MainActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Activities.Maps"/>
         <activity android:name=".Activities.AirVisual"/>
+        <activity android:name=".Activities.GraphActivity" />
     </application>
 
 </manifest>
