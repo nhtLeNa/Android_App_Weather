@@ -182,14 +182,15 @@
                         android:padding="15dp"
                         android:background="@drawable/circlegreen"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/uv"/>
+                        android:src="@drawable/uv"
+                        />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="wwqq"
+                        android:text="Low"
                         android:id="@+id/todayUvIndex"
                         android:textStyle="bold"
                         android:layout_marginTop="15dp"

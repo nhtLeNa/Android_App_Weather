@@ -1,26 +1,30 @@
 package com.example.myweather.Activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -28,6 +32,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
@@ -66,6 +72,9 @@ import java.util.Map;
 import biz.laenger.android.vpbs.ViewPagerBottomSheetBehavior;
 
 public class MainActivity extends AppCompatActivity implements LocationListener, CheckRefreshClickListener {
+
+    //Location
+    private LocationManager locationManager;
 
     private MaterialSearchView searchView;
 
@@ -237,12 +246,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @Override
     public void onGraphClick() {
-
+        Intent intent = new Intent(MainActivity.this, GraphActivity.class);
+        startActivity(intent);
     }
 
     @Override
     public void onUpdateClick() {
-
+        getCityByLocation();
     }
 
     @Override
@@ -267,7 +277,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     @Override
     public void onRefresh() {
-
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     @Override
@@ -298,7 +310,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     // Location change
     @Override
     public void onLocationChanged(Location location) {
-
+        float lat =(float) location.getLatitude();
+        float lon =(float) location.getLongitude();
+        new TodayWeatherTask(this, this, progressDialog).execute("coords", String.valueOf(lat), String.valueOf(lon));
+        new LongTermWeatherTask(this, this, progressDialog).execute("coords", String.valueOf(lat), String.valueOf(lon));
     }
 
     @Override
@@ -587,14 +602,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         citytool = findViewById(R.id.citytool);
         citytool.setText(city);
         checkWeather();
-        todayIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GraphActivity.class);
-                startActivity(intent);
-            }
-        });
-
         sendLatLon();
     }
 
@@ -969,8 +976,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         protected void updateMainUI() {
             updateTodayWeatherUI();
             updateLongTermWeatherUI();
-//            updateLastUpdateTime();
-//            updateUVIndexUI();
         }
     }
 
@@ -998,6 +1003,48 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void getCityByLocation() {
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
+            }
+
+        } else if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage(getString(R.string.getting_location));
+            progressDialog.setCancelable(false);
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.dialog_cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    try {
+                        locationManager.removeUpdates(MainActivity.this);
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+            }
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            }
+            progressDialog.show();
+            new Handler().postDelayed(() -> {
+                progressDialog.dismiss();
+                locationManager.removeUpdates(MainActivity.this);
+            }, 5000);
         }
     }
 }
