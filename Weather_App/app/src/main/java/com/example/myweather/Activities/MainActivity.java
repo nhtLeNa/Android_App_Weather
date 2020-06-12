@@ -17,6 +17,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -297,6 +298,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     @Override
     public void onCovid() {
         Intent intent = new Intent(this, CovidStatusActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onWebsiteClick() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://openweathermap.org/city"));
         startActivity(intent);
     }
 

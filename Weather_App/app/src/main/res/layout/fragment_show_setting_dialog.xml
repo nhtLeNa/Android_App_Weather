@@ -169,6 +169,22 @@
         android:textColor="@color/black"
         android:textSize="14sp" />
 
+    <TextView
+        android:id="@+id/website"
+        android:paddingLeft="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_16"
+        android:background="@drawable/ripple_text"
+        android:clickable="true"
+        android:drawablePadding="@dimen/dp_32"
+        android:drawableStart="@drawable/website"
+        android:drawableTint="#505050"
+        android:gravity="start|center_vertical"
+        android:text="Access Website"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/settings"

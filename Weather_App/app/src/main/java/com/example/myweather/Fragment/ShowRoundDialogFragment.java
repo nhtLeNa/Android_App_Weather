@@ -14,11 +14,12 @@ import com.example.myweather.Activities.RoundedBottomSheet;
 import com.example.myweather.R;
 
 public class ShowRoundDialogFragment extends RoundedBottomSheet {
-    public TextView refreshTextView, mapsTextView, airvisualTextView, covidTexView, graphTextView, locationTextView, settingsTextView, shareTextView, aboutTextView;
+    public TextView refreshTextView, mapsTextView, airvisualTextView, covidTexView, graphTextView, locationTextView, websiteTextView, settingsTextView, shareTextView, aboutTextView;
     private CheckRefreshClickListener mCheckMapsListener;
     private CheckRefreshClickListener mCheckAirVisualListener;
     private CheckRefreshClickListener mCheckGraphListener;
     private CheckRefreshClickListener mCheckAutoDetectListener;
+    private CheckRefreshClickListener mCheckWebsiteListener;
     private CheckRefreshClickListener mCheckSettingsListener;
     private CheckRefreshClickListener mCheckAboutListener;
     private CheckRefreshClickListener mCheckShareListener;
@@ -45,6 +46,7 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
         mCheckMapsListener = (CheckRefreshClickListener) context;
         mCheckAirVisualListener = (CheckRefreshClickListener) context;
         mCheckGraphListener = (CheckRefreshClickListener) context;
+        mCheckWebsiteListener = (CheckRefreshClickListener) context;
         mCheckSettingsListener = (CheckRefreshClickListener) context;
         mCheckAboutListener = (CheckRefreshClickListener) context;
         mCheckShareListener = (CheckRefreshClickListener) context;
@@ -60,6 +62,7 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
         covidTexView = getView().findViewById(R.id.covid);
         graphTextView = getView().findViewById(R.id.graph);
         locationTextView = getView().findViewById(R.id.locationup);
+        websiteTextView = getView().findViewById(R.id.website);
         settingsTextView = getView().findViewById(R.id.settings);
         aboutTextView = getView().findViewById(R.id.about);
         shareTextView = getView().findViewById(R.id.share);
@@ -69,6 +72,7 @@ public class ShowRoundDialogFragment extends RoundedBottomSheet {
         covidTexView.setOnClickListener(v -> mCheckCovid.onCovid());
         graphTextView.setOnClickListener(v -> mCheckGraphListener.onGraphClick());
         locationTextView.setOnClickListener(v -> mCheckAutoDetectListener.onUpdateClick());
+        websiteTextView.setOnClickListener(v -> mCheckWebsiteListener.onWebsiteClick());
         settingsTextView.setOnClickListener(v -> mCheckSettingsListener.onSettingsClick());
         aboutTextView.setOnClickListener(v -> mCheckAboutListener.onAboutClick());
         shareTextView.setOnClickListener(v -> mCheckShareListener.onShareClick());
